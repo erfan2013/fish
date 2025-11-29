@@ -4,7 +4,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import './App.css';
 
-const API_BASE = 'http://localhost:4000';
+const API_BASE = process.env.API_BASE;
 
 function App() {
   // کدام صفحه: mapping یا emails
