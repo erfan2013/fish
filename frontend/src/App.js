@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import './App.css';
-
+import { API_BASE, callApi } from './apiClient';
 const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:4000';
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
   const fetchEmails = async () => {
     try {
       setLoadingEmails(true);
-      const res = await axios.get(`${API_BASE}/api/emails`);
+      const res = await callApi(`${API_BASE}/api/emails`);
       if (res.data && res.data.emails) {
         setEmails(res.data.emails);
       }
@@ -72,7 +72,7 @@ function App() {
     try {
       setMessage('');
       setLoadingEmails(true);
-      const res = await axios.post(`${API_BASE}/api/upload-email-excel`, formData, {
+      const res = await callApi(`${API_BASE}/api/upload-email-excel`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setEmails(res.data.emails || []);
@@ -101,7 +101,7 @@ function App() {
     try {
       setMessage('');
       setLoadingPdfs(true);
-      const res = await axios.post(`${API_BASE}/api/upload-pdfs`, formData, {
+      const res = await callApi(`${API_BASE}/api/upload-pdfs`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setPdfs(res.data.pdfs || []);
@@ -158,7 +158,7 @@ function App() {
     setSendingPdfs(true);
     setMessage('');
     try {
-      const res = await axios.post(`${API_BASE}/api/send-mapped-pdfs`, {
+      const res = await callApi(`${API_BASE}/api/send-mapped-pdfs`, {
         mappings,
         subject: emailSubject,
         body: emailBody,
@@ -181,7 +181,7 @@ function App() {
     }
     try {
       setMessage('');
-      const res = await axios.post(`${API_BASE}/api/emails`, {
+      const res = await callApi(`${API_BASE}/api/emails`, {
         name: newEmailName,
         email: newEmailAddress,
       });
