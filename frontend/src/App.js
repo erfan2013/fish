@@ -456,7 +456,7 @@ function App() {
                     type="text"
                     value={newEmailName}
                     onChange={(e) => setNewEmailName(e.target.value)}
-                    placeholder="مثال: عرفان اسکویی"
+                    placeholder="مثال: علی رضایی"
                   />
                 </div>
                 <div className="field-group">
